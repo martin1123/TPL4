@@ -31,6 +31,8 @@ void Display7seg ( uint32_t );
 #define BUTTON_2  0,11
 #define BUTTON_3  2,13
 
+#define BUFF_SIZE 24
+
 
 // TPL2-B-INIC.c
 void Inicializar ( void );

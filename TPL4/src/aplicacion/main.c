@@ -5,6 +5,9 @@ uint8_t Buff_Display[CANT_DIGITOS] = { 0x3f, 0x06, 0x5B, 0x4f, 0x66, 0x6D };
 uint8_t flag = OFF;
 uint8_t tecla = NO_KEY;
 
+uint8_t BufferRx[BUFF_SIZE];
+uint8_t BufferRx[BUFF_SIZE];
+
 int main(void) {
 
 	uint8_t demora = OFF;
