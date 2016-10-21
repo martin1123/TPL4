@@ -5,13 +5,13 @@ uint8_t Buff_Display[CANT_DIGITOS] = { 0x3f, 0x06, 0x5B, 0x4f, 0x66, 0x6D };
 uint8_t flag = OFF;
 uint8_t tecla = NO_KEY;
 
-uint8_t BufferRx[TOPE_BUFFER];
-uint8_t BufferTx[TOPE_BUFFER];
-uint8_t inxRxIn;
-uint8_t inxRxOut;
-uint8_t inxTxIn;
-uint8_t inxTxOut;
-uint8_t TxStart;
+volatile uint8_t BufferRx[TOPE_BUFFER];
+volatile uint8_t BufferTx[TOPE_BUFFER];
+volatile uint8_t inxRxIn;
+volatile uint8_t inxRxOut;
+volatile uint8_t inxTxIn;
+volatile uint8_t inxTxOut;
+volatile uint8_t TxStart;
 
 void Transmitir (char *p);
 void armarTrama(uint8_t c, char []);
@@ -113,16 +113,26 @@ void armarTrama(uint8_t c, char trama[])
 	trama[3] = '\0';
 }
 
+/*Se recibe valor actual de V por parametro. Si se obtuvo toda la trama de datos
+ * a recibir, se retorna el dato que interesa, almacenada en el buffer de trama
+ * de recepcion. En caso de no obtenerse la trama, se retorna el mismo valor
+ * recibido por parametro.*/
 int obtenerValorTrama(int v)
 {
-	int i;
-	char tramaRx[TRAMA_SIZE];
+	static int i = 0;
+	uint8_t tramaRx[TRAMA_SIZE];
+	int r;
 
-	for(i = 0; i < TRAMA_SIZE && (tramaRx[i] = PopRx()) !=-1; i++);
+	r = PopRx();
 
-	if(tramaRx[0] != -1)
-		return tramaRx[1]; //Valor transmitido
+	if(r != -1)
+		tramaRx[i++] = (uint8_t)r;
 
+	if(!r)
+	{
+		i = 0;
+		return tramaRx[IND_DATA]; //Valor transmitido
+	}
 	return v;
 }
 

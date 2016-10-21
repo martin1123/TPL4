@@ -16,7 +16,7 @@ int PopRx (void)
       {
         aux = BufferRx[inxRxOut];
         inxRxOut ++;
-        inxRxOut &= TOPE_BUFFER;
+        inxRxOut %= TOPE_BUFFER;
       }
  return aux;
 }
@@ -25,7 +25,7 @@ void PushTx (unsigned char dato)
 {
     BufferTx[inxTxIn] = dato;
     inxTxIn ++;
-    inxTxIn &= TOPE_BUFFER;
+    inxTxIn %= TOPE_BUFFER;
 
     if (TxStart == 0)
        {

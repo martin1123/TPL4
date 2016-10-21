@@ -27,6 +27,7 @@ void Display7seg ( uint32_t );
 #define SW3 3
 #define SW4 4
 #define TRAMA_SIZE 4
+#define IND_DATA 1
 #define RESTAR 2
 #define NO_KEY 0xFF
 #define CANT_REBOTES 10
@@ -137,12 +138,12 @@ void activarDemora(void);
 //#define EXPANSION27		PORT1,31
 
 //Variables globales para uso de la UART1
-extern uint8_t inxRxIn;
-extern uint8_t inxRxOut;
-extern uint8_t inxTxIn;
-extern uint8_t inxTxOut;
-extern uint8_t BufferRx[];
-extern uint8_t BufferTx[];
-extern uint8_t TxStart;
+extern volatile  uint8_t inxRxIn;
+extern volatile  uint8_t inxRxOut;
+extern volatile  uint8_t inxTxIn;
+extern volatile  uint8_t inxTxOut;
+extern volatile  uint8_t BufferRx[];
+extern volatile  uint8_t BufferTx[];
+extern volatile  uint8_t TxStart;
 
 #endif /* KIT_INFO2_H_ */
