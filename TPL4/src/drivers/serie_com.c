@@ -54,7 +54,7 @@ int PopTx (void)
     {
       aux = BufferTx[inxTxOut];
       inxTxOut ++;
-      inxTxOut &= TOPE_BUFFER;
+      inxTxOut %= TOPE_BUFFER;
     }
 
   return aux;
