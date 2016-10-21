@@ -128,7 +128,7 @@ int obtenerValorTrama(int v)
 	if(r != -1)
 		tramaRx[i++] = (uint8_t)r;
 
-	if(!r)
+	if(r == '$')
 	{
 		i = 0;
 		return tramaRx[IND_DATA]; //Valor transmitido
