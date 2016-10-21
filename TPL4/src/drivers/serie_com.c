@@ -48,7 +48,7 @@ void PushRx (unsigned char dato)
 
 int PopTx (void)
 {
-  int aux = -1;
+  int aux = 0;
 
   if (inxTxIn != inxTxOut)
     {
