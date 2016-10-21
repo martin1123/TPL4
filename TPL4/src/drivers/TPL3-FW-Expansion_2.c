@@ -49,16 +49,16 @@ uint8_t DriverTeclado ( void )
 	// Eliminación del rebote de los pulsadores
 
 	if (GetPIN(BUTTON_0,ALTO)==0) //Fila 0
-		return SUMAR;
+		return SW1;
 
 	if (GetPIN(BUTTON_1,ALTO)==0) //Fila 1
-		return RESTAR;
+		return SW2;
 
 	if (GetPIN(BUTTON_2,ALTO)==0) //Fila 2
-		return NO_KEY;
+		return SW3;
 
 	if (GetPIN(BUTTON_3,ALTO)==0) //Fila 3
-		return NO_KEY;
+		return SW4;
 
 	return NO_KEY; //Caso en que se detecte otro boton presionad
 }
