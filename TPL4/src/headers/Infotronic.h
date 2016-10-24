@@ -22,7 +22,12 @@ void Display7seg ( uint32_t );
 #define  ON		1
 #define  OFF 	0
 #define ALTO 1
-#define SUMAR 1
+#define SW1 1
+#define SW2 2
+#define SW3 3
+#define SW4 4
+#define TRAMA_SIZE 4
+#define IND_DATA 1
 #define RESTAR 2
 #define NO_KEY 0xFF
 #define CANT_REBOTES 10
@@ -31,6 +36,7 @@ void Display7seg ( uint32_t );
 #define BUTTON_2  0,11
 #define BUTTON_3  2,13
 
+#define TOPE_BUFFER 24
 
 // TPL2-B-INIC.c
 void Inicializar ( void );
@@ -131,5 +137,13 @@ void activarDemora(void);
 //#define EXPANSION26		PORT1,31
 //#define EXPANSION27		PORT1,31
 
+//Variables globales para uso de la UART1
+extern volatile  uint8_t inxRxIn;
+extern volatile  uint8_t inxRxOut;
+extern volatile  uint8_t inxTxIn;
+extern volatile  uint8_t inxTxOut;
+extern volatile  uint8_t BufferRx[];
+extern volatile  uint8_t BufferTx[];
+extern volatile  uint8_t TxStart;
 
 #endif /* KIT_INFO2_H_ */

@@ -103,7 +103,7 @@ void InitUART1 (void)
        SetPINSEL(0,16,1);	//RX0D   P0.3  PINSEL0: 6/7
        U1LCR1 = 0x03;		 //6.- Registro U1LCR, pongo DLAB en 0
 
-       /*
-       U0IER = 0x03;	//7. Habilito las interrupciones que correspondan (en la UART-IER- y en el NVIC-ISER)
-       ISER0 |= (1<<5);	//ver pág. 77 del user manual*/
+       U1IER = IER_RBR | IER_THRE ;		// Habilito interrupciones
+       ISER0 |= (1<<6);
+
 }
