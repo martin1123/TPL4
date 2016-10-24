@@ -18,7 +18,7 @@ void armarTrama(uint8_t c, char []);
 int obtenerValorTrama(int v);
 
 int main(void) {
-	int b = 1;
+	/*int b = 1;*/
 	uint8_t c;
     uint32_t Valor = 0;
     char tramaTx[TRAMA_SIZE];
@@ -66,7 +66,7 @@ int main(void) {
 
 		 Display7seg (Valor);
 
-		 /**TEST-INI**/
+		 /**TEST-INI**
 		 if(b)
 		 {
 			 armarTrama(1,tramaTx);
@@ -120,7 +120,7 @@ void armarTrama(uint8_t c, char trama[])
 int obtenerValorTrama(int v)
 {
 	static int i = 0;
-	uint8_t tramaRx[TRAMA_SIZE];
+	static uint8_t tramaRx[TRAMA_SIZE];
 	int r;
 
 	r = PopRx();
@@ -131,7 +131,7 @@ int obtenerValorTrama(int v)
 	if(r == '$')
 	{
 		i = 0;
-		return tramaRx[IND_DATA]; //Valor transmitido
+		return tramaRx[IND_DATA + 1]; //Valor transmitido
 	}
 	return v;
 }
