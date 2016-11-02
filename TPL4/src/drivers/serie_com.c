@@ -52,8 +52,8 @@ int PopTx (void)
 
   if (inxTxIn != inxTxOut)
     {
-      aux = BufferTx[inxTxOut];
       inxTxOut ++;
+      aux = BufferTx[inxTxOut];
       inxTxOut %= TOPE_BUFFER;
     }
 

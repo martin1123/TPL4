@@ -131,7 +131,7 @@ int obtenerValorTrama(int v)
 	if(r == '$')
 	{
 		i = 0;
-		return tramaRx[IND_DATA + 1]; //Valor transmitido
+		return tramaRx[IND_DATA]; //Valor transmitido
 	}
 	return v;
 }
