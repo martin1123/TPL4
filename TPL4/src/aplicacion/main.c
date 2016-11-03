@@ -12,6 +12,10 @@ volatile uint8_t inxRxOut;
 volatile uint8_t inxTxIn;
 volatile uint8_t inxTxOut;
 volatile uint8_t TxStart;
+volatile uint8_t bufferTxEmpty = ON;
+volatile uint8_t bufferRxEmpty = ON;
+volatile uint8_t bufferTxFull = OFF;
+volatile uint8_t bufferRxFull = OFF;
 
 void Transmitir (char *p);
 void armarTrama(uint8_t c, char []);
@@ -66,14 +70,6 @@ int main(void) {
 
 		 Display7seg (Valor);
 
-		 /**TEST-INI**
-		 if(b)
-		 {
-			 armarTrama(1,tramaTx);
-			 Transmitir(tramaTx);
-			 b = 0;
-		 }
-		 /**TEST-FIN**/
 		 switch (c)
 		 {
 	 	 	 case SW1:

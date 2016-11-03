@@ -10,26 +10,39 @@
 int PopRx (void)
 {
 
-    int aux = -1;
+    int aux;
 
-    if (inxRxIn != inxRxOut)
-      {
-        aux = BufferRx[inxRxOut];
-        inxRxOut ++;
-        inxRxOut %= TOPE_BUFFER;
-      }
- return aux;
+    if(bufferRxEmpty)
+    	return -1;
+
+    aux = BufferRx[inxRxOut++];
+    inxRxOut %= TOPE_BUFFER;
+    bufferRxFull = OFF;
+
+    if (inxRxIn == inxRxOut)
+    	bufferRxEmpty = ON;
+
+    return aux;
 }
 
-void PushTx (unsigned char dato)
+int PushTx (unsigned char dato)
 {
-    BufferTx[inxTxIn] = dato;
-    inxTxIn ++;
+	if(bufferTxFull)
+		return -1;
+
+    BufferTx[inxTxIn++] = dato;
     inxTxIn %= TOPE_BUFFER;
+    bufferTxEmpty = OFF;
+
+    if (inxTxIn == inxTxOut)
+    	bufferTxFull = ON;
 
     if (TxStart == 0)
-       {
+    {
         TxStart = 1;
-        U1THR= BufferTx[inxTxOut];
-       }
+        bufferTxEmpty = ON;
+        U1THR= BufferTx[inxTxOut++];
+    }
+
+    return 1;
 }

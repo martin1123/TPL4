@@ -20,16 +20,10 @@ void UART1_IRQHandler (void)
                             U1THR = dato_tx;
                         else
                             TxStart = 0; // aviso que puedo volver a transmitir
-                        //BufferTx[inxOut]; //transmito
-                        //inxOut++;
-                        //inxOut %= TOPE_BUFFER;
                         break;
 
              case 0x04: dato = U1RBR;
                         PushRx (dato);
-                        //BufferRx[inxIn] = U1RBR;           //recibo
-                        //inxIn++;
-                        //inxIn %= TOPE_BUFFER;
                         break;
 
              case 0x06: //errores
@@ -39,23 +33,37 @@ void UART1_IRQHandler (void)
 
 }
 
-void PushRx (unsigned char dato)
+int PushRx (uint8_t dato)
 {
-  BufferRx[inxRxIn] = dato;           //recibo
-  inxRxIn++;
+
+  if(bufferRxFull)
+	  return -1;
+
+  BufferRx[inxRxIn++] = dato;
   inxRxIn %= TOPE_BUFFER;
+  bufferRxEmpty = OFF;
+
+  if(inxRxIn == inxRxOut)
+	  bufferRxFull = ON;
+
+  return 1;
 }
 
 int PopTx (void)
 {
   int aux = 0;
 
-  if (inxTxIn != inxTxOut)
-    {
-      inxTxOut ++;
-      aux = BufferTx[inxTxOut];
-      inxTxOut %= TOPE_BUFFER;
-    }
+  if(bufferTxEmpty)
+	  return -1;
+
+  aux = BufferTx[inxTxOut++];
+  inxTxOut %= TOPE_BUFFER;
+  bufferTxFull = OFF;
+
+  if (inxTxIn == inxTxOut)
+  {
+	  bufferTxEmpty = ON;
+  }
 
   return aux;
 }

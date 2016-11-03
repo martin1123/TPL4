@@ -57,6 +57,8 @@ uint8_t GetPIN( uint8_t , uint8_t , uint8_t );
 // DEMORAS
 void activarDemora(void);
 
+int PushRx (uint8_t dato);
+
 //Identificación de los puertos de expansion:
 #define EXPANSION0		PORT2,7
     #define 	LED1        EXPANSION0 	// PLACA EXPANSION 1
@@ -145,5 +147,9 @@ extern volatile  uint8_t inxTxOut;
 extern volatile  uint8_t BufferRx[];
 extern volatile  uint8_t BufferTx[];
 extern volatile  uint8_t TxStart;
+extern volatile uint8_t bufferTxEmpty;
+extern volatile uint8_t bufferRxEmpty;
+extern volatile uint8_t bufferTxFull;
+extern volatile uint8_t bufferRxFull;
 
 #endif /* KIT_INFO2_H_ */
